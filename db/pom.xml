@@ -40,7 +40,12 @@
     </dependencies>
 
     <build>
-        <outputDirectory>kappa</outputDirectory>
+        <resources>
+            <resource>
+                <directory>kappa/</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.liquibase</groupId>
@@ -60,12 +65,16 @@
                     <password>880ds2d</password>
                     <contexts>local</contexts>
                     <promptOnNonLocalDatabase>true</promptOnNonLocalDatabase>
+                    <tag>${project.version}</tag>
+                    <rollbackTag>${project.version}</rollbackTag>
                 </configuration>
                 <executions>
                     <execution>
                         <phase>process-resources</phase>
                         <goals>
                             <goal>update</goal>
+                            <goal>tag</goal>
+                            <goal>rollback</goal>
                         </goals>
                     </execution>
                 </executions>
