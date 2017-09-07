@@ -67,6 +67,7 @@
                     <promptOnNonLocalDatabase>true</promptOnNonLocalDatabase>
                     <tag>${project.version}</tag>
                     <rollbackTag>${project.version}</rollbackTag>
+                    
                 </configuration>
                 <executions>
                     <execution>
