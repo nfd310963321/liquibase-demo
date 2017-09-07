@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.dexter.liquibase</groupId>
+        <artifactId>liquibase-demo</artifactId>
+        <version>0.0.0.1</version>
+    </parent>
+    <artifactId>liquibase-db</artifactId>
+
+    <properties>
+        <!-- profiles -->
+        <build.profile.id>local</build.profile.id>
+        <!-- dependencies -->
+        <spring.version>1.2.7.RELEASE</spring.version>
+        <oracle.version>10.2.0.4.0</oracle.version>
+        <liquibase.version>3.4.1</liquibase.version>
+        <!-- structure -->
+        <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+
+        <!-- Database -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.17</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>${liquibase.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <outputDirectory>kappa</outputDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>${liquibase.version}</version>
+
+                <!-- Use to clear checksum, rollback, migrate and etc.
+                     Update are included in clean install
+                    # mvn liquibase:clearCheckSums -Dliquibase.url= -Dliquibase.username= -Dliquibase.password=
+                -->
+                <configuration>
+                    <verbose>true</verbose>
+                    <changeLogFile>db.master.xml</changeLogFile>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <url>jdbc:mysql://localhost:9527/test</url>
+                    <username>root</username>
+                    <password>880ds2d</password>
+                    <contexts>local</contexts>
+                    <promptOnNonLocalDatabase>true</promptOnNonLocalDatabase>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
