@@ -25,6 +25,7 @@
     <modules>
         <module>db</module>
         <module>liquibase-model</module>
+        <module>larva-liquibase-maven-plugin</module>
     </modules>
 
 </project>
